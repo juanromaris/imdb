@@ -57,7 +57,7 @@ var imdb = (function() {
     var pelicula = new Pelicula();
 
     // Agregamos titulo y cuerpo
-    pelicula.titulo = document.getElementById("titulo").value;
+    pelicula.titulo = $("#titulo").val();
     console.log(pelicula.titulo);
     pelicula.descripcion = document.getElementById("descripcion").value;
     console.log(pelicula.descripcion);
