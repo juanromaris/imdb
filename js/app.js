@@ -6,23 +6,6 @@ $(document).ready(function() {
 
 
 
-
-var hola = $("p");
-
-console.log(hola);
-
-
-var clase = $(".container");
-
-
-console.log(clase);
-
-
-var s3 = $("ul li").eq(2).html();
-console.log(s3);
-
-
-
 var imdb = (function() {
 
   // entorno privado
@@ -59,12 +42,12 @@ var imdb = (function() {
     // Agregamos titulo y cuerpo
     pelicula.titulo = $("#titulo").val();
     console.log(pelicula.titulo);
-    pelicula.descripcion = document.getElementById("descripcion").value;
+    pelicula.descripcion = $("#descripcion").val();
     console.log(pelicula.descripcion);
-    pelicula.img = document.getElementById("img").value;
+    pelicula.img = $("#img").val();
     console.log(pelicula.img);
     // Si el usuario cargo algo hago esto, caso contrario..
-    if (pelicula.titulo && pelicula.descripcion !== null) {
+    if (pelicula.titulo && pelicula.descripcion && pelicula.img !== null) {
       peliculas.push(pelicula);
       return true;
     } else {
@@ -75,36 +58,75 @@ var imdb = (function() {
 
 
   function mostrarPeliculas() {
-
+console.log("hola que tal");
     // Agarramos el container de noticias (fijate que metodo usamos)
     if (peliculas.length > 0) {
-
+      console.log("hola if ");
 
       // capturo el elemento con ID "noticias" (fijate en el HTML)
-      var containerPeliculas = document.getElementById("peliculas");
+      var containerPeliculas = $("#peliculas");
 
 
       // Creamos un par de variables para el titulo y parrafo
       var tituloConFormato;
       var parrafoConFormato;
+      var imagenAgregada;
+
+
+
+
+
+
 
 
       // Iteramos sobre el array de noticias
       for (var i = 0; i < peliculas.length; i++) {
 
         // Creamos los elementos y los asignamos
-        tituloConFormato = document.createElement("h2");
+        tituloConFormato = document.createElement("h1");
         parrafoConFormato = document.createElement("p");
+        imagenAgregada = document.createElement("img");
+       
+      
+      
+
+
 
         // Agrego el contenido del titulo y noticias
-        tituloConFormato.innerHTML = peliculas[i].titulo;
-        parrafoConFormato.innerHTML = peliculas[i].descripcion;
-        parrafoConFormato.innerHTML = peliculas[i].img;
+        tituloConFormato.append(peliculas[i].titulo);
+        parrafoConFormato.append(peliculas[i].descripcion);
+        imagenAgregada.append(peliculas[i].img);
 
         // Los agrego al DOM
-        containerPeliculas.appendChild(tituloConFormato);
-        containerPeliculas.appendChild(parrafoConFormato);
+        containerPeliculas.append(tituloConFormato);
+        containerPeliculas.append(parrafoConFormato);
+        containerPeliculas.append('<img src="'+imagenAgregada+'">');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+         
       }
+
+
+
+
+
+
+
+
+
+
 
       // Vaciamos el array al finalizar (proba que pasa si sacas esto)
       peliculas = [];
@@ -118,6 +140,42 @@ var imdb = (function() {
     }
 
   }
+
+
+
+
+
+function ordenarazPeliculas() {
+
+
+
+peliculas.sort();
+
+}
+
+function ordenarzaPeliculas() {
+
+peliculas.sort();
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
   // entorno publico
@@ -138,16 +196,47 @@ var imdb = (function() {
         return "No se ha agregado ninguna noticia, cargue una antes.";
       }
 
+    },
+
+
+
+    ordenaraz: function() {
+      if (ordenarazPeliculas()) {
+        return "Cargando noticias al DOM..";
+      } else {
+        return "No se ha agregado ninguna noticia, cargue una antes.";
+      }
+
+    },
+
+
+
+    ordenarza: function() {
+      if (ordenarzaPeliculas()) {
+        return "Cargando noticias al DOM..";
+      } else {
+        return "No se ha agregado ninguna noticia, cargue una antes.";
+      }
+
     }
+
+
+
+
+
+
   };
 
 })();
 
 console.log("Carga de JS realizada con exito!");
 
-var botonAgregar = document.getElementById("boton-agregar");
-     botonAgregar.onclick = agregarPelicula ();
+var botonAgregar = $("#boton-agregar");
+     botonAgregar.click = agregarPelicula ();
 
 
-var botonMostrar = document.getElementById("boton-mostrar");
-     botonMostrar.onclick = mostrarPeliculas ();
+var botonMostrar = $("#boton-mostrar");
+     botonMostrar.click = mostrarPeliculas ();
+
+
+     

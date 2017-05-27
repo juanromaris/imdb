@@ -28,17 +28,13 @@
     <br>
     <input type="button" id="boton-mostrar" value="mostrar peliculas" onclick="imdb.mostrar();">
 
-    <br>
-    <input type="button" id="boton-ordenar-az" value="ordenar peliculas AZ" onclick="imdb.ordenaraz();">
-    <br>
-    <input type="button" id="boton-ordenar-za" value="ordenar peliculas ZA" onclick="imdb.ordenarza();">
 
   </form>
 
     <hr>
   <div id="peliculas">
 
-   
+    <img class="img-container" width="200" id="logo-img" src="#" />
 
     </div>
 
@@ -51,7 +47,28 @@
   <!-- Cargamos Nuestro JavaScript -->
   <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
   <script type="text/javascript" src="js/app.js"></script>
-  
+  <script type="text/javascript">
+
+
+  jQuery(function ()
+        {
+    jQuery("input[type=file]").change(function() {
+        readURL(this);
+    });
+ 
+    const readURL = (input) => {
+ 
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+ 
+            reader.onload = (e) => {
+                jQuery('#logo-img').attr('src', e.target.result)
+                jQuery('#peliculas').css('display', 'block');
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    };
+})</script>
   
 
 </body>
